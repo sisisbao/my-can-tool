@@ -287,7 +287,7 @@ uploaded_file = st.sidebar.file_uploader(
 
 filter_ids_input = st.sidebar.text_area(
     "2. 过滤 CAN ID (选填，留空则不过滤)", 
-    placeholder="例如: 7E8, 7E9, 18DAF110\n支持逗号、空格或换行分隔"
+    placeholder="例如: 7E8, 7E9, 18DAF110\n支持逗号、分号、空格或换行分隔"
 )
 
 # 报文过滤去重选项
@@ -314,10 +314,10 @@ if uploaded_file is not None and start_btn:
             st.warning("未能在文件中解析到任何有效的 CAN 消息，请检查报文格式是否规范。")
             st.stop()
 
-        # 整理过滤的 ID 列表
+        # 整理过滤的 ID 列表 - 已优化：支持中英文逗号、分号、换行和空格分割
         target_ids = []
         if enable_filtering and filter_ids_input.strip():
-            target_ids = [x.upper().replace('0X', '') for x in re.split(r'[,\s\n]+', filter_ids_input) if x]
+            target_ids = [x.upper().replace('0X', '') for x in re.split(r'[,\s\n;，；]+', filter_ids_input) if x]
 
         # 2. UDS 扫描诊断分析与请求关联（拆分为“上下”双行结构）
         uds_table_rows = []
