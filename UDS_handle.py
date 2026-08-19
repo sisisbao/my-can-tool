@@ -54,6 +54,9 @@ st.markdown(f"""
         color: #1A202C;
         margin: 15px 0px 8px 10px;
     }}
+        a[href*="github.com"] svg {{
+        display: none !important;
+    }}
     
     /* 屏蔽原生 Streamlit 按钮的默认样式，将其包装为灰色条形 */
     [data-testid="stSidebar"] [data-testid="baseButton-secondary"] {{
