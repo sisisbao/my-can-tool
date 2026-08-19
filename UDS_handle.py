@@ -44,13 +44,7 @@ active_page = st.session_state['current_page']
 st.markdown(f"""
     <style>
         /* 仅隐藏右上角的 GitHub 图标链接，保留其他头部元素 */
-    [data-testid="stHeaderGitHubLink"] {{
-        display: none !important;
-    }}
-     header a[href*="github"] {{
-        display: none !important;
-    }}
-     a[href*="github"] {{
+     header a, [data-testid="stHeader"] a, .stAppHeader a {{
         display: none !important;
     }}
     /* 侧边栏系统标题格式 */
