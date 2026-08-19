@@ -3,3 +3,4 @@ pandas
 python-can
 google-generativeai
 openpyxl
+openai
