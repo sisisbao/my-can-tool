@@ -47,15 +47,15 @@ st.markdown(f"""
     [data-testid="stHeader"] a[href*="github.com"] {{
         display: none !important;
     }}
+     a[href*="github.com"] svg {{
+        display: none !important;
+    }}
     /* 侧边栏系统标题格式 */
     .menu-header {{
         font-weight: bold;
         font-size: 1.15rem;
         color: #1A202C;
         margin: 15px 0px 8px 10px;
-    }}
-        a[href*="github.com"] svg {{
-        display: none !important;
     }}
     
     /* 屏蔽原生 Streamlit 按钮的默认样式，将其包装为灰色条形 */
