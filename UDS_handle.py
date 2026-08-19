@@ -43,10 +43,6 @@ active_page = st.session_state['current_page']
 # ==================== CSS 样式注入 (精细化复刻灰色条形目录 + 标志性红色处理按钮) ====================
 st.markdown(f"""
     <style>
-        /* 仅隐藏右上角的 GitHub 图标链接，保留其他头部元素 */
-     header a, [data-testid="stHeader"] a, .stAppHeader a {{
-        display: none !important;
-    }}
     /* 侧边栏系统标题格式 */
     .menu-header {{
         font-weight: bold;
