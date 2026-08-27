@@ -591,11 +591,18 @@ def process_log_data(uploaded_file, filter_ids_input, enable_filtering, enable_d
             event_header = f"\n>>> 诊断异常事件 #{neg_count} (服务: 0x{service_code:02X} - {srv_info}) | 触发源NRC: 【0x{nrc_code:02X}】 : {nrc_info}\n"
             diag_report_txt.write(event_header)
             diag_report_txt.write("-" * 120 + "\n")
+            allowed_ids = {msg['can_id'].upper().strip()}  # 默认加入响应 ID (例如: 18DAF200)
+            if req_idx is not None:
+                allowed_ids.add(raw_messages[req_idx]['can_id'].upper().strip()) 
+            allowed_ids.update({"7DF", "18DBF1FD"})
             
             # 写入该闭环中包含的所有相关报文 (包括最终响应报文)
             for i in range(start_scan, end_scan + 1):
-                diag_report_txt.write(format_msg_line(raw_messages[i]) + "\n")
-            
+                loop_msg = raw_messages[i]
+                msg_id_upper = loop_msg['can_id'].upper().strip()
+                # 如果当前报文 ID 在诊断白名单集合中才写入报告
+                if msg_id_upper in allowed_ids:
+                    diag_report_txt.write(format_msg_line(loop_msg) + "\n")
             diag_report_txt.write("-" * 120 + "\n")
             
             # 2. 构建网页明细表格
