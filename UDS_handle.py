@@ -279,7 +279,9 @@ if st.session_state['current_page'] == "数据处理":
                                             # 如果挂起后没抓到其它回复，默认记为成功 (或悬空状态)
                                             if service_name not in pending_events:
                                                 pending_events[service_name] = {'success': 0, 'failed': {}}
-                                            pending_events[service_name]['success'] += 1
+                                            err_nrc = "【0xEE】: Timeout/No Response (无响应/网络挂起)"
+                                            pending_events[service_name]['failed'][err_nrc] = pending_events[service_name]['failed'].get(err_nrc, 0) + 1
+                                            # pending_events[service_name]['success'] += 1
                                     else:
                                         # 没有 78 伴随，纯粹的直接响应。只统计带有“【0x”且不是 Success 的真实否定否定响应
                                         for _, row in resp_rows.iterrows():
